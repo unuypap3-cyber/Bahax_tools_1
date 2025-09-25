@@ -1,0 +1,357 @@
+import React, { useState } from 'react';
+import { Card, CardContent } from '/components/ui/card';
+import { Button } from '/components/ui/button';
+import { Input } from '/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '/components/ui/avatar';
+
+const BahaksToolsApp = () => {
+  const [activeTab, setActiveTab] = useState('home');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const services = [
+    {
+      id: 'ride',
+      name: 'Bahak Ride',
+      icon: '🏍️',
+      description: 'Ojek & Mobil',
+      color: 'bg-green-500'
+    },
+    {
+      id: 'food',
+      name: 'Bahak Food',
+      icon: '🍔',
+      description: 'Pesan Makanan',
+      color: 'bg-red-500'
+    },
+    {
+      id: 'mart',
+      name: 'Bahak Mart',
+      icon: '🛒',
+      description: 'Belanja Harian',
+      color: 'bg-blue-500'
+    },
+    {
+      id: 'send',
+      name: 'Bahak Send',
+      icon: '📦',
+      description: 'Kirim Paket',
+      color: 'bg-yellow-500'
+    },
+    {
+      id: 'med',
+      name: 'Bahak Med',
+      icon: '💊',
+      description: 'Obat & Kesehatan',
+      color: 'bg-purple-500'
+    },
+    {
+      id: 'clean',
+      name: 'Bahak Clean',
+      icon: '🧹',
+      description: 'Bersih Rumah',
+      color: 'bg-cyan-500'
+    },
+    {
+      id: 'massage',
+      name: 'Bahak Massage',
+      icon: '💆',
+      description: 'Pijat & Spa',
+      color: 'bg-pink-500'
+    },
+    {
+      id: 'beauty',
+      name: 'Bahak Beauty',
+      icon: '💄',
+      description: 'Salon & Kecantikan',
+      color: 'bg-orange-500'
+    },
+    {
+      id: 'fix',
+      name: 'Bahak Fix',
+      icon: '🔧',
+      description: 'Servis & Perbaikan',
+      color: 'bg-gray-600'
+    },
+    {
+      id: 'pay',
+      name: 'Bahak Pay',
+      icon: '💳',
+      description: 'Bayar & Transfer',
+      color: 'bg-indigo-500'
+    },
+    {
+      id: 'shop',
+      name: 'Bahak Shop',
+      icon: '🛍️',
+      description: 'Belanja Online',
+      color: 'bg-teal-500'
+    },
+    {
+      id: 'car',
+      name: 'Bahak Car',
+      icon: '🚗',
+      description: 'Sewa Mobil',
+      color: 'bg-emerald-500'
+    }
+  ];
+
+  const quickActions = [
+    { name: 'Scan QR', icon: '📱', action: () => alert('Fitur Scan QR') },
+    { name: 'Promo', icon: '🎟️', action: () => alert('Lihat Promo') },
+    { name: 'Riwayat', icon: '📋', action: () => alert('Riwayat Pesanan') },
+    { name: 'Bantuan', icon: '❓', action: () => alert('Pusat Bantuan') }
+  ];
+
+  const promos = [
+    {
+      title: 'Diskon 50% Bahak Food',
+      subtitle: 'Khusus pengguna baru',
+      color: 'bg-gradient-to-r from-red-500 to-pink-500'
+    },
+    {
+      title: 'Gratis Ongkir Bahak Mart',
+      subtitle: 'Min. pembelian 50rb',
+      color: 'bg-gradient-to-r from-blue-500 to-cyan-500'
+    },
+    {
+      title: 'Cashback 25% Bahak Ride',
+      subtitle: 'Maksimal cashback 15rb',
+      color: 'bg-gradient-to-r from-green-500 to-emerald-500'
+    }
+  ];
+
+  const handleServiceClick = (serviceName: string) => {
+    alert(`Membuka ${serviceName}...`);
+  };
+
+  const handleWhatsAppContact = () => {
+    window.open('https://wa.me/081330771837', '_blank');
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header with Animated Title */}
+      <div className="bg-primary text-white p-4 pb-8">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-3">
+            <Avatar>
+              <AvatarImage src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/db671840-eb28-4601-a3c7-758282685474.png" alt="Profile picture of user with friendly smile" />
+              <AvatarFallback>B</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm opacity-80">Halo,</p>
+              <p className="font-semibold">Pengguna Bahaks</p>
+            </div>
+          </div>
+          <div className="flex space-x-2">
+            <Button variant="ghost" size="sm" className="text-white">
+              🔔
+            </Button>
+            <Button variant="ghost" size="sm" className="text-white">
+              💰
+            </Button>
+          </div>
+        </div>
+
+        {/* Animated Rainbow Title */}
+        <div className="text-center mb-6">
+          <h1 
+            className="text-4xl font-bold mb-2 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse"
+            style={{
+              backgroundSize: '400% 400%',
+              animation: 'rainbow 3s ease-in-out infinite'
+            }}
+          >
+            ✨ BAHAKS TOOLS ✨
+          </h1>
+          <style jsx>{`
+            @keyframes rainbow {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+            }
+            h1 {
+              background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+              background-size: 1000% 1000%;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              animation: rainbow 2s linear infinite;
+              text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            }
+          `}</style>
+        </div>
+
+        {/* Search Bar */}
+        <div className="relative">
+          <Input
+            placeholder="Cari layanan, makanan, atau tujuan..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-white text-black pl-4 pr-10"
+          />
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+            🔍
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="px-4 -mt-6 mb-6">
+        <Card className="bg-white shadow-lg">
+          <CardContent className="p-4">
+            <div className="grid grid-cols-4 gap-4">
+              {quickActions.map((action, index) => (
+                <button
+                  key={index}
+                  onClick={action.action}
+                  className="flex flex-col items-center space-y-2 p-3 rounded-lg hover:bg-muted transition-colors"
+                >
+                  <div className="text-2xl">{action.icon}</div>
+                  <span className="text-xs text-center font-medium">{action.name}</span>
+                </button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Promo Banner */}
+      <div className="px-4 mb-6">
+        <div className="flex space-x-4 overflow-x-auto pb-2">
+          {promos.map((promo, index) => (
+            <Card key={index} className={`${promo.color} min-w-80 text-white flex-shrink-0`}>
+              <CardContent className="p-4">
+                <h3 className="font-bold text-lg mb-1">{promo.title}</h3>
+                <p className="text-sm opacity-90">{promo.subtitle}</p>
+                <Button variant="secondary" size="sm" className="mt-3">
+                  Klaim Sekarang
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Services Grid */}
+      <div className="px-4 mb-6">
+        <h2 className="text-xl font-bold mb-4">Layanan Kami</h2>
+        <div className="grid grid-cols-3 gap-4">
+          {services.map((service) => (
+            <Card key={service.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleServiceClick(service.name)}>
+              <CardContent className="p-4 text-center">
+                <div className={`${service.color} w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-white text-xl`}>
+                  {service.icon}
+                </div>
+                <h3 className="font-semibold text-sm mb-1">{service.name}</h3>
+                <p className="text-xs text-muted-foreground">{service.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Recent Activity */}
+      <div className="px-4 mb-6">
+        <h2 className="text-xl font-bold mb-4">Aktivitas Terakhir</h2>
+        <Card>
+          <CardContent className="p-4">
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="bg-green-100 p-2 rounded-full">
+                  <span className="text-green-600">🏍️</span>
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium">Bahak Ride ke Mall Central</p>
+                  <p className="text-sm text-muted-foreground">2 jam yang lalu • Rp 25.000</p>
+                </div>
+                <Button variant="outline" size="sm">Pesan Lagi</Button>
+              </div>
+              <div className="flex items-center space-x-3">
+                <div className="bg-red-100 p-2 rounded-full">
+                  <span className="text-red-600">🍔</span>
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium">Bahak Food - Ayam Geprek</p>
+                  <p className="text-sm text-muted-foreground">1 hari yang lalu • Rp 35.000</p>
+                </div>
+                <Button variant="outline" size="sm">Pesan Lagi</Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Creator Section with Animated Text */}
+      <div className="px-4 mb-20">
+        <Card className="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+          <CardContent className="p-6 text-center">
+            <div className="mb-4">
+              <p 
+                className="text-2xl font-bold bg-gradient-to-r from-yellow-300 via-pink-300 via-blue-300 via-green-300 to-yellow-300 bg-clip-text text-transparent animate-pulse"
+                style={{
+                  backgroundSize: '400% 400%',
+                  animation: 'rainbow 2s ease-in-out infinite'
+                }}
+              >
+                ⭐ Created By Bahak ⭐
+              </p>
+              <style jsx>{`
+                p {
+                  background: linear-gradient(45deg, #ffd700, #ff69b4, #00bfff, #32cd32, #ffd700, #ff69b4);
+                  background-size: 600% 600%;
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  animation: creatorRainbow 3s linear infinite;
+                  text-shadow: 0 0 15px rgba(255,255,255,0.8);
+                }
+                @keyframes creatorRainbow {
+                  0% { background-position: 0% 50%; }
+                  25% { background-position: 100% 50%; }
+                  50% { background-position: 100% 100%; }
+                  75% { background-position: 0% 100%; }
+                  100% { background-position: 0% 50%; }
+                }
+              `}</style>
+            </div>
+            <p className="text-lg mb-4">Hubungi Developer</p>
+            <Button 
+              onClick={handleWhatsAppContact}
+              className="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-full"
+            >
+              📱 WhatsApp: 081330771837
+            </Button>
+            <p className="text-sm mt-4 opacity-80">
+              Terima kasih telah menggunakan Bahaks Tools!
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border">
+        <div className="grid grid-cols-5 py-2">
+          {[
+            { id: 'home', icon: '🏠', label: 'Beranda' },
+            { id: 'orders', icon: '📋', label: 'Pesanan' },
+            { id: 'inbox', icon: '💬', label: 'Inbox' },
+            { id: 'account', icon: '👤', label: 'Akun' },
+            { id: 'more', icon: '⋯', label: 'Lainnya' }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex flex-col items-center py-2 ${
+                activeTab === tab.id ? 'text-primary' : 'text-muted-foreground'
+              }`}
+            >
+              <div className="text-xl mb-1">{tab.icon}</div>
+              <span className="text-xs">{tab.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BahaksToolsApp;
