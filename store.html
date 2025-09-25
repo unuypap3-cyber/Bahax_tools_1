@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bahax Store - Toko Online Terpercaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #00ff00;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Efek Matrix Background */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 20, 0, 0.8);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid #00ff00;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .judul-kilo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.2rem;
+            background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: kilau 8s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        @keyframes kilau {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 30px;
+            border: 2px solid #00cc00;
+            background: rgba(0, 30, 0, 0.8);
+            color: #fff;
+            outline: none;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #00ff00;
+            cursor: pointer;
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            color: #00ff00;
+            margin-left: 20px;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff0000;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: rgba(0, 30, 0, 0.8);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #00cc00;
+        }
+        
+        nav a {
+            color: #00ff00;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #00cc00;
+            color: #000;
+        }
+        
+        /* Main Content */
+        .container {
+            display: flex;
+            padding: 20px 5%;
+            gap: 20px;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            flex: 0 0 250px;
+            background: rgba(0, 30, 0, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #00cc00;
+        }
+        
+        .sidebar h3 {
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #00ff00;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar ul li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #008800;
+        }
+        
+        .sidebar ul li a {
+            color: #00cc00;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .sidebar ul li a:hover {
+            color: #00ff00;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+        }
+        
+        .banner {
+            background: linear-gradient(45deg, #002200, #004400);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid #00cc00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .typing-effect {
+            font-size: 1.5rem;
+            color: #00ff00;
+            height: 2rem;
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            animation: typing 4s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff00; }
+        }
+        
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .product-card {
+            background: rgba(0, 30, 0, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #008800;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
+            animation: color-change 2s infinite;
+        }
+        
+        @keyframes color-change {
+            0% { border-color: #ff0000; }
+            25% { border-color: #ffff00; }
+            50% { border-color: #00ff00; }
+            75% { border-color: #00ffff; }
+            100% { border-color: #ff00ff; }
+        }
+        
+        .product-img {
+            height: 180px;
+            background-color: #002200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00cc00;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            color: #00ff00;
+            margin-bottom: 5px;
+        }
+        
+        .product-price {
+            color: #ffff00;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .product-rating {
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+        
+        .add-to-cart {
+            background: #00aa00;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .add-to-cart:hover {
+            background: #00cc00;
+        }
+        
+        /* Forms */
+        .form-section {
+            background: rgba(0, 30, 0, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #00cc00;
+        }
+        
+        .form-toggle {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .form-toggle button {
+            flex: 1;
+            padding: 10px;
+            background: #003300;
+            border: none;
+            color: #00cc00;
+            cursor: pointer;
+        }
+        
+        .form-toggle button.active {
+            background: #00aa00;
+            color: white;
+        }
+        
+        .form-container {
+            display: none;
+        }
+        
+        .form-container.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00cc00;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #008800;
+            background: #002200;
+            color: white;
+        }
+        
+        .form-submit {
+            background: #00aa00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 20, 0, 0.9);
+            padding: 30px 5%;
+            margin-top: 40px;
+            border-top: 2px solid #00ff00;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: #00ff00;
+            border-bottom: 2px solid #00cc00;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #00cc00;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #00ff00;
+        }
+        
+        .creator-link {
+            color: #00ff00 !important;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Payment and Shipping */
+        .payment-methods, .shipping-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .payment-method, .shipping-method {
+            background: #002200;
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #008800;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 1;
+                margin-bottom: 20px;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                margin: 0;
+            }
+            
+            .judul-kilo {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1 class="judul-kilo">Bahax Store</h1>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Cari produk...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">3</span>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <a href="#"><i class="fas fa-home"></i> Beranda</a>
+        <a href="#"><i class="fas fa-box"></i> Kategori</a>
+        <a href="#"><i class="fas fa-percent"></i> Promo</a>
+        <a href="#"><i class="fas fa-truck"></i> Pengiriman</a>
+        <a href="#"><i class="fas fa-credit-card"></i> Pembayaran</a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Kategori Produk</h3>
+            <ul>
+                <li><a href="#">Elektronik</a></li>
+                <li><a href="#">Fashion Pria</a></li>
+                <li><a href="#">Fashion Wanita</a></li>
+                <li><a href="#">Handphone & Tablet</a></li>
+                <li><a href="#">Komputer & Laptop</a></li>
+                <li><a href="#">Perawatan Kecantikan</a></li>
+                <li><a href="#">Olahraga & Hobi</a></li>
+                <li><a href="#">Makanan & Minuman</a></li>
+            </ul>
+            
+            <h3>Filter Harga</h3>
+            <ul>
+                <li><a href="#">Rp 0 - Rp 100.000</a></li>
+                <li><a href="#">Rp 100.000 - Rp 300.000</a></li>
+                <li><a href="#">Rp 300.000 - Rp 500.000</a></li>
+                <li><a href="#">Di atas Rp 500.000</a></li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Banner with Typing Effect -->
+            <div class="banner">
+                <div class="typing-effect">Sugeng rawuh di website ku selamat berbelanja.by bahax</div>
+            </div>
+            
+            <!-- Products Grid -->
+            <h2 style="color: #00ff00; margin: 20px 0;">Produk Terbaru</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-mobile-alt fa-3x"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smartphone XYZ</h3>
+                        <p class="product-price">Rp 2.499.000</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(24)</span>
+                        </div>
+                        <button class="add-to-cart">+ Keranjang</button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-laptop fa-3x"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Laptop Gaming</h3>
+                        <p class="product-price">Rp 12.999.000</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(18)</span>
+                        </div>
+                        <button class="add-to-cart">+ Keranjang</button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-headphones fa-3x"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Headphone Wireless</h3>
+                        <p class="product-price">Rp 899.000</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(42)</span>
+                        </div>
+                        <button class="add-to-cart">+ Keranjang</button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <i class="fas fa-tshirt fa-3x"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Kaos Casual</h3>
+                        <p class="product-price">Rp 149.000</p>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                            <span>(31)</span>
+                        </div>
+                        <button class="add-to-cart">+ Keranjang</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Login/Register Form -->
+            <div class="form-section">
+                <div class="form-toggle">
+                    <button class="active" onclick="showForm('login-form')">Login</button>
+                    <button onclick="showForm('register-form')">Daftar</button>
+                </div>
+                
+                <div id="login-form" class="form-container active">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Masukkan email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Masukkan password">
+                    </div>
+                    <button class="form-submit">Login</button>
+                </div>
+                
+                <div id="register-form" class="form-container">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" placeholder="Masukkan nama lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" placeholder="Masukkan email">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" placeholder="Buat password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Konfirmasi Password</label>
+                        <input type="password" id="confirm-password" placeholder="Ulangi password">
+                    </div>
+                    <button class="form-submit">Daftar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Kami</h3>
+                <p>Bahax Store adalah toko online terpercaya dengan berbagai produk berkualitas dan harga terbaik.</p>
+                <p>kudu nerimo ing pandum seng opo onone wae</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Metode Pembayaran</h3>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <i class="fas fa-money-bill-wave"></i> Dana
+                    </div>
+                    <div class="payment-method">
+                        <i class="fas fa-university"></i> BCA
+                    </div>
+                    <div class="payment-method">
+                        <i class="fas fa-mobile-alt"></i> Isaku
+                    </div>
+                    <div class="payment-method">
+                        <i class="fas fa-wallet"></i> OVO
+                    </div>
+                    <div class="payment-method">
+                        <i class="fas fa-credit-card"></i> Gopay
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kurir Pengiriman</h3>
+                <div class="shipping-methods">
+                    <div class="shipping-method">
+                        <i class="fas fa-shipping-fast"></i> J&T
+                    </div>
+                    <div class="shipping-method">
+                        <i class="fas fa-truck"></i> Ninja Express
+                    </div>
+                    <div class="shipping-method">
+                        <i class="fas fa-box"></i> Pos Indonesia
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <h3>Cek Resi</h3>
+                    <input type="text" placeholder="Masukkan nomor resi" style="width: 100%; padding: 8px; background: #002200; border: 1px solid #008800; color: white; border-radius: 5px;">
+                    <button class="form-submit" style="margin-top: 10px;">Cek Resi</button>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Kontak Kami</h3>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: 081330771837</p>
+                <p><i class="fas fa-envelope"></i> Email: nonamecyber96@gmail.com</p>
+                
+                <h3>Creator</h3>
+                <p class="creator-link" onclick="showCreator()">bahax</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let letters = '01010101010101010101010101010101';
+        letters = letters.split('');
+        
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for(let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+        
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00FF00';
+            ctx.font = `${fontSize}px arial`;
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(draw, 33);
+        
+        // Form Toggle
+        function showForm(formId) {
+            document.querySelectorAll('.form-container').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.form-toggle button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(formId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Show Creator Info
+        function showCreator() {
+            alert("Nama creator: bahax\nHoby: mangan minyak\nNomer WhatsApp: 081330771837");
+        }
+        
+        // Product Click Effect
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.animation = 'color-change 2s infinite';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 2000);
+            });
+        });
+        
+        // Window Resize Handling
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
